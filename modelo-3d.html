@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+		<script>
+			AFRAME.registerComponent('click-audio', {
+				schema: { src: { type: 'string' } },
+				init: function () {
+					var selector = this.data.src
+					this.el.addEventListener('mouseenter', function () {
+						var audio = document.querySelector(selector)
+						if (audio) {
+							audio.currentTime = 0
+							audio.play().catch(function () {})
+						}
+					})
+				},
+			})
+		</script>
+	</head>
+
+	<body>
+		<a-scene>
+			<!-- PLACEHOLDER: reemplaza cada src con tu archivo de audio real -->
+			<a-assets>
+				<audio id="sonido-1" src="sonidos/air-horn.mp3" preload="auto"></audio>
+				<audio id="sonido-2" src="sonidos/edm-1.mp3" preload="auto"></audio>
+				<audio id="sonido-3" src="sonidos/edm-2.mp3" preload="auto"></audio>
+				<audio
+					id="sonido-4"
+					src="sonidos/kick-sound.mp3"
+					preload="auto"
+				></audio>
+				<audio
+					id="sonido-5"
+					src="sonidos/lightsaber.mp3"
+					preload="auto"
+				></audio>
+				<audio id="sonido-6" src="sonidos/scratch-1.mp3" preload="auto"></audio>
+				<audio id="sonido-7" src="sonidos/scratch-2.mp3" preload="auto"></audio>
+				<audio
+					id="sonido-8"
+					src="sonidos/snare-sound.mp3"
+					preload="auto"
+				></audio>
+			</a-assets>
+
+			<a-entity
+				gltf-model="./ui_exapmles-main/scene.gltf"
+				position="0 -20 -20"
+				scale="0.03 0.03 0.03"
+			></a-entity>
+
+			<!-- izquierda> -->
+			<a-cylinder
+				id="zona-plato-izq"
+				position="-13.8 -11.4 -15.8"
+				scale="2 0.3 2"
+				material="opacity: 0; transparent: true; color: #FF4444"
+				click-audio="src: #sonido-6"
+				class="clickable"
+			></a-cylinder>
+
+			<a-cylinder
+				id="superior-izq"
+				position="-13.8 -11.4 -20"
+				scale="2 0.3 2"
+				material="opacity: 0; transparent: true; color: #FFF444"
+				click-audio="src: #sonido-5"
+				class="clickable"
+			></a-cylinder>
+			<a-cylinder
+				id="centro-izq"
+				position="-5 -11.4 -16"
+				scale="5 0.3 3"
+				material="opacity: 0; transparent: true; color: #AAAFFF"
+				click-audio="src: #sonido-2"
+				class="clickable"
+			></a-cylinder>
+			<a-cylinder
+				id="lateral-izq"
+				position="-11.2 -11.4 -17.2"
+				scale="0.5 0.3 4.5"
+				material="opacity: 0; transparent: true; color: #66CC11"
+				click-audio="src: #sonido-4"
+				class="clickable"
+			></a-cylinder>
+			<!-- derecha -->
+			<a-cylinder
+				id="zona-plato-der"
+				position="13.8 -11.4 -15.8"
+				scale="2 0.3 2"
+				material="opacity: 0; transparent: true; color: #FF4444"
+				click-audio="src: #sonido-7"
+				class="clickable"
+			></a-cylinder>
+			<a-cylinder
+				id="superior-der"
+				position="13.8 -11.4 -20"
+				scale="2 0.3 2"
+				material="opacity: 0; transparent: true; color: #FFF444"
+				click-audio="src: #sonido-1"
+				class="clickable"
+			></a-cylinder>
+			<a-cylinder
+				id="centro-der"
+				position="5 -11.4 -16"
+				scale="5 0.3 3"
+				material="opacity: 0; transparent: true; color: #AAAFFF"
+				click-audio="src: #sonido-3"
+				class="clickable"
+			></a-cylinder>
+			<a-cylinder
+				id="lateral-der"
+				position="11.2 -11.4 -17.2"
+				scale="0.5 0.3 4.5"
+				material="opacity: 0; transparent: true; color: #66CC11"
+				click-audio="src: #sonido-8"
+				class="clickable"
+			></a-cylinder>
+			<a-camera>
+				<a-cursor
+					color="white"
+					raycaster="objects: .clickable"
+					event-set__enter="_event: mouseenter; color: yellow"
+					event-set__leave="_event: mouseleave; color: white"
+				></a-cursor>
+			</a-camera>
+		</a-scene>
+	</body>
+</html>
